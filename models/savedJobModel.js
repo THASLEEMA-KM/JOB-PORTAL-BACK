@@ -45,6 +45,7 @@ const saveJobModelSchema = new mongoose.Schema({
         type:Date,
         required:true
     },
+    
     userId:{
         type:String,
         required:true

@@ -4,6 +4,7 @@ const adminController = require('../controllers/adminController')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const jwtUserMiddleware = require('../middlewares/jwtUserMiddleware')
 const router = new express.Router()
+// const savedJobController = require('../controllers/savedJobController')
 
 //register- http://localhost:3000/register
 router.post('/register',userController.registerController)
@@ -31,8 +32,13 @@ router.delete('/viewjob/:id/remove',jwtMiddleware,adminController.removeJobContr
 
 router.post('/viewjob/:id/savejob',jwtUserMiddleware,userController.savedJobsController)
 
+// router.post('/viewjob/:id/savejob',jwtUserMiddleware,savedJobController.savedJobsController)
 router.get('/savedjob',jwtUserMiddleware,userController.getSavedJobsController)
 
+// remove saved job
+router.delete('/savedjob/:id/remove',jwtUserMiddleware,userController.removeSavedJobController)
+
+// apply job
 router.post('/viewjob/:id/applyjob',jwtUserMiddleware,userController.applyJobController)
 
 
