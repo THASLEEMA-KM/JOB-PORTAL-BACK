@@ -104,7 +104,7 @@ exports.savedJobsController = async (req,res) =>{
             res.status(406).json("Job Already Saved to Your Collection!")
         }else{
             const newJob = new savedjobs({
-                _id: id,title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline,userId
+                _id:id,title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline,userId
             })
             await newJob.save()
             res.status(200).json(newJob)
@@ -134,6 +134,7 @@ exports.getSavedJobsController = async (req,res)=>{
         res.status(401).json(error)
     }
 }
+
 // remove saved job 
 exports.removeSavedJobController = async (req,res)=>{
     console.log(("Inside remove saved job controller"));
@@ -165,23 +166,26 @@ exports.removeSavedJobController = async (req,res)=>{
 // }
 
 exports.applyJobController = async (req,res) =>{
-    console.log("Inside Saved Jobs Controller");
-    const {title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline} = req.body
+    console.log("Inside Apply Jobs Controller");
+    const {title,username,email,mobile} = req.body
     const {id} = req.params
     const userId = req.payload
+    const resumeFile = req.file.filename
+    console.log(`resume is ${resumeFile}`);
+    
     console.log(`user id is : ${userId} and id is ${id}`);
     try {
-        const alreadyapplied = await appliedjobs.findOne({id,userId})
+        const alreadyapplied = await appliedjobs.findOne({_id:id,userId})
         console.log(`exist ${alreadyapplied}`);
         if(alreadyapplied){
-            res.status(406).json("Job Already already applied!")
+            res.status(406).json("Job Already applied!")
         }else{
             const newApplication = new appliedjobs({
-                title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline,userId
+                _id:id,title,username,email,mobile,resumeFile,userId
             })
             await newApplication.save()
             res.status(200).json(newApplication)
-            console.log(`Saved job is 
+            console.log(`Applied job is 
                 ${newApplication}
                 `);
         }

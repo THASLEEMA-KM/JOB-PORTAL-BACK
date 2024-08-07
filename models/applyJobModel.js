@@ -5,44 +5,20 @@ const applyJobModelSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    salary:{
-        type:Number,
+    username:{
+        type:String,
         required:true
     },
     email:{
         type:String,
         required:true
     },
-    company:{
-        type:String,
-        required:true
-    },
-    location:{
-        type:String,
-        required:true
-    },
-    description:{
-        type:String,
-        required:true
-    },
-    category:{
-        type:String,
-        required:true
-    },
-    jobType:{
-        type:String,
-        required:true
-    },
-    experience:{
-        type:String,
-        required:true
-    },
-    vacancy:{
+    mobile:{
         type:Number,
         required:true
     },
-    deadline:{
-        type:Date,
+    resumeFile:{
+        type:String,
         required:true
     },
     userId:{
@@ -52,4 +28,5 @@ const applyJobModelSchema = new mongoose.Schema({
 })
 
 const appliedjobs = mongoose.model("appliedjobs",applyJobModelSchema)
+
 module.exports = appliedjobs

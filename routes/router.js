@@ -3,7 +3,10 @@ const userController = require('../controllers/userController')
 const adminController = require('../controllers/adminController')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const jwtUserMiddleware = require('../middlewares/jwtUserMiddleware')
+const multerMiddleware = require('../middlewares/multerMiddleware')
 const router = new express.Router()
+
+
 // const savedJobController = require('../controllers/savedJobController')
 
 //register- http://localhost:3000/register
@@ -39,7 +42,7 @@ router.get('/savedjob',jwtUserMiddleware,userController.getSavedJobsController)
 router.delete('/savedjob/:id/remove',jwtUserMiddleware,userController.removeSavedJobController)
 
 // apply job
-router.post('/viewjob/:id/applyjob',jwtUserMiddleware,userController.applyJobController)
+router.post('/viewjob/:id/applyjob',jwtUserMiddleware,multerMiddleware.single('resumeFile'),userController.applyJobController)
 
 
 module.exports = router
