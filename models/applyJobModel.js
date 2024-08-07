@@ -24,6 +24,14 @@ const applyJobModelSchema = new mongoose.Schema({
     userId:{
         type:String,
         required:true
+    },
+    // id:{
+    //     type:String,
+    //     required:true
+    // }
+    jobId: {  
+        type: String,
+        required: true
     }
 })
 

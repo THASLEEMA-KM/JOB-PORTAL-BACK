@@ -1,6 +1,8 @@
 const express = require('express')
 const userController = require('../controllers/userController')
 const adminController = require('../controllers/adminController')
+const savedJobController = require('../controllers/savedJobController')
+const applyJobController = require('../controllers/applyJobController')
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 const jwtUserMiddleware = require('../middlewares/jwtUserMiddleware')
 const multerMiddleware = require('../middlewares/multerMiddleware')
@@ -31,18 +33,25 @@ router.get('/viewjob/:id',adminController.viewAJobController)
 router.delete('/viewjob/:id/remove',jwtMiddleware,adminController.removeJobController)
 
 // http://localhost:3000/savejob
-// router.post('/savejob',jwtUserMiddleware,userController.savedJobsController)
+// router.post('/viewjob/:id/savejob',jwtUserMiddleware,userController.savedJobsController)
+router.post('/viewjob/:id/savejob',jwtUserMiddleware,savedJobController.savedJobsController)
 
-router.post('/viewjob/:id/savejob',jwtUserMiddleware,userController.savedJobsController)
-
-// router.post('/viewjob/:id/savejob',jwtUserMiddleware,savedJobController.savedJobsController)
-router.get('/savedjob',jwtUserMiddleware,userController.getSavedJobsController)
+//  get saved jobs
+// router.get('/savedjob',jwtUserMiddleware,userController.getSavedJobsController)
+router.get('/savedjob',jwtUserMiddleware,savedJobController.getSavedJobsController)
 
 // remove saved job
-router.delete('/savedjob/:id/remove',jwtUserMiddleware,userController.removeSavedJobController)
+// router.delete('/savedjob/:id/remove',jwtUserMiddleware,userController.removeSavedJobController)
+router.delete('/savedjob/:id/remove',jwtUserMiddleware,savedJobController.removeSavedJobController)
+
 
 // apply job
-router.post('/viewjob/:id/applyjob',jwtUserMiddleware,multerMiddleware.single('resumeFile'),userController.applyJobController)
+// router.post('/viewjob/:id/applyjob',jwtUserMiddleware,multerMiddleware.single('resumeFile'),userController.applyJobController)
+router.post('/viewjob/:id/applyjob',jwtUserMiddleware,multerMiddleware.single('resumeFile'),applyJobController.applyJobsController)
+
+// get appliedjobs
+// router.get('/appliedjob',jwtUserMiddleware,userController.getAppliedJobsController)
+router.get('/appliedjob',jwtUserMiddleware,applyJobController.getAppliedJobsController)
 
 
 module.exports = router
