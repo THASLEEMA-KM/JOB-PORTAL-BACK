@@ -47,11 +47,16 @@ router.delete('/savedjob/:id/remove',jwtUserMiddleware,savedJobController.remove
 
 // apply job
 // router.post('/viewjob/:id/applyjob',jwtUserMiddleware,multerMiddleware.single('resumeFile'),userController.applyJobController)
-router.post('/viewjob/:id/applyjob',jwtUserMiddleware,multerMiddleware.single('resumeFile'),applyJobController.applyJobsController)
+router.post('/viewjob/:id',jwtUserMiddleware,multerMiddleware.single('resumeFile'),applyJobController.applyJobsController)
 
 // get appliedjobs
 // router.get('/appliedjob',jwtUserMiddleware,userController.getAppliedJobsController)
 router.get('/appliedjob',jwtUserMiddleware,applyJobController.getAppliedJobsController)
 
+// remove applied jobs
+router.delete('/appliedjob/:id/remove',jwtUserMiddleware,applyJobController.removeAppliedJobsController)
+
+// get all user appliedjobs to admin
+router.get('/viewjob/:id/viewApplication',jwtMiddleware,adminController.getAppliedJobsController)
 
 module.exports = router

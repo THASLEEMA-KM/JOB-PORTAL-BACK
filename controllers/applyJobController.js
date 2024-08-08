@@ -68,3 +68,15 @@ exports.getAppliedJobsController = async(req,res)=>{
 //         console.log(error);
 //     }
 // };
+
+exports.removeAppliedJobsController = async(req,res)=>{
+    console.log("Inside remove Job Controller");
+    const {id} = req.params
+    console.log(id);
+    try {
+        const removeAppliedJob = await appliedjobs.findByIdAndDelete({_id:id})
+        res.status(200).json(removeAppliedJob)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}

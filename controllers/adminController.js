@@ -1,6 +1,7 @@
 // const admins = require('../models/adminModel')
 const jwt = require('jsonwebtoken')
-const jobs = require('../models/jobModel')
+const jobs = require('../models/jobModel');
+const appliedjobs = require('../models/applyJobModel');
 
 // exports.adminLoginController = async (req,res) =>
 //     {
@@ -120,4 +121,22 @@ exports.removeJobController = async(req,res)=>{
     } catch (error) {
         res.status(401).json(error)
     }
+}
+exports.getAppliedJobsController = async(req,res)=>{
+    console.log("Inside get applied jobs controller");
+    const adminId = req.payload
+    console.log(`line 39 userid ${adminId}`);
+    
+    try {
+        console.log(("inside try block of get applied"));
+        
+        const allApplications = await appliedjobs.find()
+        res.status(200).json(allApplications)
+        console.log(allApplications);
+        
+    } catch (error) {
+        res.status(401).json(error)
+        console.log(`line 48 ${error}`);    
+    }
+    
 }
