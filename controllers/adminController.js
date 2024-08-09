@@ -126,11 +126,13 @@ exports.getAppliedJobsController = async(req,res)=>{
     console.log("Inside get applied jobs controller");
     const adminId = req.payload
     console.log(`line 39 userid ${adminId}`);
+    const {id} = req.params
+    console.log(id);
     
     try {
         console.log(("inside try block of get applied"));
         
-        const allApplications = await appliedjobs.find()
+        const allApplications = await appliedjobs.find({jobId:id})
         res.status(200).json(allApplications)
         console.log(allApplications);
         
