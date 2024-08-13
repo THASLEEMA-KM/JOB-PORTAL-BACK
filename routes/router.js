@@ -23,6 +23,7 @@ router.post('/login',userController.loginController)
  // http://localhost:3000/postjob
  router.post('/postjob',jwtMiddleware,adminController.postJobController)
  
+
 //  http://localhost:3000/viewjob
 router.get('/viewjob',adminController.viewAllJobController)
 
@@ -31,6 +32,9 @@ router.get('/viewjob/:id',adminController.viewAJobController)
 
 // http://localhost:3000/viewjob/5/removeJob
 router.delete('/viewjob/:id/remove',jwtMiddleware,adminController.removeJobController)
+
+// http://localhost:3000/viewjob/5/editJob
+router.put('/viewjob/:id/edit',jwtMiddleware,adminController.editAJobController)
 
 // http://localhost:3000/savejob
 // router.post('/viewjob/:id/savejob',jwtUserMiddleware,userController.savedJobsController)
@@ -58,5 +62,11 @@ router.delete('/appliedjob/:id/remove',jwtUserMiddleware,applyJobController.remo
 
 // get all user appliedjobs to admin
 router.get('/viewjob/:id/viewApplication',jwtMiddleware,adminController.getAppliedJobsController)
+
+// remove user application
+router.delete('/viewjob/:id/viewApplication/:applicationId/remove',jwtMiddleware,adminController.removeApplicationConttoller)
+
+// update status api
+router.put('/viewjob/:id/viewApplication/:applicationId/status',jwtMiddleware,adminController.updateJobStatusController);
 
 module.exports = router

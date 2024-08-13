@@ -32,6 +32,12 @@ const applyJobModelSchema = new mongoose.Schema({
     jobId: {  
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        enum: ['Pending', 'Approved', 'Rejected'],  
+        default: 'Pending', 
+        required: true
     }
 })
 

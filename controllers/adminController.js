@@ -43,25 +43,25 @@ exports.postJobController = async(req,res) =>{
     // if(adminId)
     // {
     //     try {
-    //         // const existingJob = jobs.findOne({_id:id})
-    //         // if(existingJob){
-    //         //     res.status(406).json("Job Already exist!")
+    //         const existingJob = await jobs.findOne({_id:id})
+    //         if(existingJob){
+    //             res.status(406).json("Job Already exist!")
     
-    //         // }
-    //         // else
-    //         // {
-    //         //     const newJob = new jobs({
-    //         //         title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline
-    //         //     })
-    //         //     await newJob.save()
-    //         //     res.status(200).json(newJob)
+    //         }
+    //         else
+    //         {
+    //             const newJob = new jobs({
+    //                 title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline,id
+    //             })
+    //             await newJob.save()
+    //             res.status(200).json(newJob)
         
-    //         // }
-    //         const newJob = new jobs({
-    //             title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline
-    //         })
-    //         await newJob.save()
-    //         res.status(200).json(newJob)
+    //         }
+    //         // const newJob = new jobs({
+    //         //     title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline
+    //         // })
+    //         // await newJob.save()
+    //         // res.status(200).json(newJob)
             
     //     } catch (error) {
     //         res.status(401).json(error)
@@ -110,6 +110,20 @@ exports.viewAJobController = async(req,res)=>{
         res.status(401).json(error)
     }
 }
+// edit a job
+exports.editAJobController = async(req,res)=>{
+    console.log("INside edit a job controller");
+    const {id} = req.params
+    const {title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline} = req.body
+    try {
+        const updatedJob = await jobs.findByIdAndUpdate({_id:id},{title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline})
+        await updatedJob.save()
+        res.status(200).json(updatedJob)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+    
+}
 // remove job
 exports.removeJobController = async(req,res)=>{
     console.log("Inside remove Job Controller");
@@ -139,6 +153,45 @@ exports.getAppliedJobsController = async(req,res)=>{
     } catch (error) {
         res.status(401).json(error)
         console.log(`line 48 ${error}`);    
+    }
+    
+}
+// update job status
+exports.updateJobStatusController = async(req,res)=>{
+    console.log("Inside update stts job");
+    const { applicationId } = req.params;
+    const { status } = req.body;
+
+    try {
+        // Find the applied job by ID and update its status
+        const application = await appliedjobs.findByIdAndUpdate(
+            applicationId,
+            { status },
+            { new: true, runValidators: true }
+        );
+
+        if (!application) {
+            return res.status(404).json({ message: 'Application not found' });
+        }
+
+        res.status(200).json(application);
+    } catch (error) {
+        console.error('Error updating application status:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+    
+}
+// remove user applied job
+exports.removeApplicationConttoller = async(req,res)=>{
+    console.log("Inside remove application controller");
+    const {id} = req.params
+    try {
+        const allUserApplications = await appliedjobs.findByIdAndUpdate({_id:id})
+        res.status(200).json(allUserApplications)
+        console.log(allUserApplications);
+        
+    } catch (error) {
+        res.status(401).json(error)
     }
     
 }
