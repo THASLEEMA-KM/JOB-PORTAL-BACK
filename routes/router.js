@@ -17,8 +17,11 @@ router.post('/register',userController.registerController)
 //login- http://localhost:3000/login
 router.post('/login',userController.loginController)
 
-// // http://localhost:3000/adminlogin
+// http://localhost:3000/adminlogin
 // router.post('/adminlogin',adminController.adminLoginController)
+
+//http://localhost:3000/postjob
+router.get('/userProfile',jwtUserMiddleware,userController.userDetailsController)
 
  // http://localhost:3000/postjob
  router.post('/postjob',jwtMiddleware,adminController.postJobController)

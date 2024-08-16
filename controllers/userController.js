@@ -84,6 +84,22 @@ exports.registerController = async (req,res)=>{
             }
         } 
 
+//get user details
+exports.userDetailsController = async(req,res)=>{
+    const userId = req.payload
+    console.log(userId);
+
+    try {
+
+        const userProfile = await users.findOne({ _id: userId })
+        res.status(200).json(userProfile)
+
+    } catch (error) {
+        res.status(401).json(error)
+    }
+
+}
+
 // //  save jobs
 // exports.savedJobsController = async (req,res) =>{
 //     console.log("Inside Saved Jobs Controller");
