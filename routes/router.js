@@ -20,8 +20,11 @@ router.post('/login',userController.loginController)
 // http://localhost:3000/adminlogin
 // router.post('/adminlogin',adminController.adminLoginController)
 
-//http://localhost:3000/postjob
+//http://localhost:3000/userprofile
 router.get('/userProfile',jwtUserMiddleware,userController.userDetailsController)
+
+//http://localhost:3000/userprofile/edit
+router.put('/userProfile/edit',jwtUserMiddleware,multerMiddleware.single('resumeFile'),userController.editProfileController)
 
  // http://localhost:3000/postjob
  router.post('/postjob',jwtMiddleware,adminController.postJobController)

@@ -96,11 +96,25 @@ exports.userDetailsController = async(req,res)=>{
 
     } catch (error) {
         res.status(401).json(error)
-    }
+    }
 
 }
 
-// //  save jobs
+//edit Profile
+exports.editProfileController = async(req,res)=>{
+    const {username,email,password,mobile,gender,location,skill,experience,resumeFile} = req.body
+    const uploadResume = req.file?req.file.filename:resumeFile
+    const userId = req.payload
+    try {
+        const updateProfile = await users.findByIdAndUpdate({_id:userId},{username,email,password,mobile,gender,location,skill,experience,resumeFile:uploadResume},{new:true})
+        res.status(200).json(users.updateProfile)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}
+
+
+// save jobs
 // exports.savedJobsController = async (req,res) =>{
 //     console.log("Inside Saved Jobs Controller");
 //     const {title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline} = req.body
