@@ -2,19 +2,17 @@ const savedjobs = require('../models/savedJobModel')
 const jwt = require('jsonwebtoken')
 
 
-// // save jobs
+// save jobs
 exports.savedJobsController = async (req,res) =>{
     console.log("Inside Saved Jobs Controller");
     const {title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline} = req.body
     const {id} = req.params
     const userId = req.payload
     // console.log("Request Body:", req.body);
-    console.log("Request Params:", req.params);
-    
+    // console.log("Request Params:", req.params);
     
     console.log(`user id is : ${userId} and id is ${id}`);
     try {
-        // const objectid = new  ObjectId(id);
         const existingJob = await savedjobs.findOne({id,userId})
         console.log(`existing job list ${existingJob}`);
         if(existingJob){

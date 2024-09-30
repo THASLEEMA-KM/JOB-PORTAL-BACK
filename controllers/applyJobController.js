@@ -1,6 +1,6 @@
 const appliedjobs = require('../models/applyJobModel')
 
-
+//apply job
 exports.applyJobsController = async (req,res) =>{
     console.log("Inside Apply Jobs Controller");
     const {title,username,email,mobile} = req.body
@@ -33,6 +33,7 @@ exports.applyJobsController = async (req,res) =>{
 
 }
 
+// get applied jobs
 exports.getAppliedJobsController = async(req,res)=>{
     console.log("Inside get applied jobs controller");
     const userId = req.payload
@@ -52,23 +53,7 @@ exports.getAppliedJobsController = async(req,res)=>{
     
 }
 
-// exports.getAppliedJobsController = async (req, res) => {
-//     console.log("Inside Get Applied Jobs Controller");
-//     const userId = req.payload;
-//     console.log(`User ID: ${userId}`);
-    
-//     try {
-//         console.log("Inside try block of get applied jobs");
-//         const allAppliedJobs = await appliedjobs.find({ userId });
-//         console.log(`Found ${allAppliedJobs.length} applied jobs`);
-//         res.status(200).json(allAppliedJobs);
-//         console.log(allAppliedJobs);
-//     } catch (error) {
-//         res.status(401).json(error);
-//         console.log(error);
-//     }
-// };
-
+// remove applied jobs
 exports.removeAppliedJobsController = async(req,res)=>{
     console.log("Inside remove Job Controller");
     const {id} = req.params

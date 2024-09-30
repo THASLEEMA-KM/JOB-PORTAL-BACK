@@ -9,8 +9,6 @@ const multerMiddleware = require('../middlewares/multerMiddleware')
 const router = new express.Router()
 
 
-// const savedJobController = require('../controllers/savedJobController')
-
 //register- http://localhost:3000/register
 router.post('/register',userController.registerController)
 
@@ -43,24 +41,19 @@ router.delete('/viewjob/:id/remove',jwtMiddleware,adminController.removeJobContr
 router.put('/viewjob/:id/edit',jwtMiddleware,adminController.editAJobController)
 
 // http://localhost:3000/savejob
-// router.post('/viewjob/:id/savejob',jwtUserMiddleware,userController.savedJobsController)
 router.post('/viewjob/:id/savejob',jwtUserMiddleware,savedJobController.savedJobsController)
 
 //  get saved jobs
-// router.get('/savedjob',jwtUserMiddleware,userController.getSavedJobsController)
 router.get('/savedjob',jwtUserMiddleware,savedJobController.getSavedJobsController)
 
 // remove saved job
-// router.delete('/savedjob/:id/remove',jwtUserMiddleware,userController.removeSavedJobController)
 router.delete('/savedjob/:id/remove',jwtUserMiddleware,savedJobController.removeSavedJobController)
 
 
 // apply job
-// router.post('/viewjob/:id/applyjob',jwtUserMiddleware,multerMiddleware.single('resumeFile'),userController.applyJobController)
 router.post('/viewjob/:id',jwtUserMiddleware,multerMiddleware.single('resumeFile'),applyJobController.applyJobsController)
 
 // get appliedjobs
-// router.get('/appliedjob',jwtUserMiddleware,userController.getAppliedJobsController)
 router.get('/appliedjob',jwtUserMiddleware,applyJobController.getAppliedJobsController)
 
 // remove applied jobs

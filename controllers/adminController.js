@@ -1,77 +1,15 @@
-// const admins = require('../models/adminModel')
 const jwt = require('jsonwebtoken')
 const jobs = require('../models/jobModel');
 const appliedjobs = require('../models/applyJobModel');
 
-// exports.adminLoginController = async (req,res) =>
-//     {
-//         console.log("inside admin Login");
-//         const {email,password} = req.body
-//         console.log(email,password);
-//         try {
-//             const adminUser = await admins.findOne({email,password})
-//             if(adminUser)
-//                 {
-//                     // token generate
-//                     const token = jwt.sign({adminId:adminUser._id},process.env.JWT_PASSWORD)
-//                     res.status(200).json({
-//                         admin:adminUser,
-//                         token
-//                     })
-//                 }else{
-//                     res.status(404).json("Invalid Email / Password..")
-//                 }
-//         } catch (error) {
-//             res.status(401).json(error)
-//             console.log(error);
-            
-//         }
-//     }
-
 // add job
-
 exports.postJobController = async(req,res) =>{
     console.log("Inside PostJobController");
     const {title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline} = req.body
     console.log(title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline);
     const adminId = req.payload
-    console.log(adminId);
+    // console.log(adminId);
     
-    // const {id} = req.params
-    // console.log(id);
-    // console.log("Request Params" , req.params);
-    // if(adminId)
-    // {
-    //     try {
-    //         const existingJob = await jobs.findOne({_id:id})
-    //         if(existingJob){
-    //             res.status(406).json("Job Already exist!")
-    
-    //         }
-    //         else
-    //         {
-    //             const newJob = new jobs({
-    //                 title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline,id
-    //             })
-    //             await newJob.save()
-    //             res.status(200).json(newJob)
-        
-    //         }
-    //         // const newJob = new jobs({
-    //         //     title,salary,email,company,location,description,category,jobType,experience,vacancy,deadline
-    //         // })
-    //         // await newJob.save()
-    //         // res.status(200).json(newJob)
-            
-    //     } catch (error) {
-    //         res.status(401).json(error)
-    //     }
-        
-    // }
-    // else{
-    //     res.status(406).json("please login as admin")
-    // }
-
     try {
         
         const newJob = new jobs({
@@ -110,6 +48,7 @@ exports.viewAJobController = async(req,res)=>{
         res.status(401).json(error)
     }
 }
+
 // edit a job
 exports.editAJobController = async(req,res)=>{
     console.log("INside edit a job controller");
@@ -124,6 +63,7 @@ exports.editAJobController = async(req,res)=>{
     }
     
 }
+
 // remove job
 exports.removeJobController = async(req,res)=>{
     console.log("Inside remove Job Controller");
@@ -136,6 +76,8 @@ exports.removeJobController = async(req,res)=>{
         res.status(401).json(error)
     }
 }
+
+//get applied jobs
 exports.getAppliedJobsController = async(req,res)=>{
     console.log("Inside get applied jobs controller");
     const adminId = req.payload
@@ -156,6 +98,7 @@ exports.getAppliedJobsController = async(req,res)=>{
     }
     
 }
+
 // update job status
 exports.updateJobStatusController = async(req,res)=>{
     console.log("Inside update stts job");
@@ -181,6 +124,7 @@ exports.updateJobStatusController = async(req,res)=>{
     }
     
 }
+
 // remove user applied job
 exports.removeApplicationConttoller = async(req,res)=>{
     console.log("Inside remove application controller");

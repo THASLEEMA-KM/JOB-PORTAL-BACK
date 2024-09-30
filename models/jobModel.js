@@ -46,14 +46,6 @@ deadline:{
     required:true,
     default:Date.now()
 },
-// _id:{
-//     type:String,
-//     required:true
-// }
-// jobPicture:{
-//     type:String,
-//     required:true
-// },
 
 
 })
