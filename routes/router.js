@@ -62,6 +62,9 @@ router.delete('/appliedjob/:id/remove',jwtUserMiddleware,applyJobController.remo
 // get all user appliedjobs to admin
 router.get('/viewjob/:id/viewApplication',jwtMiddleware,adminController.getAppliedJobsController)
 
+// get all user applications to admin
+router.get('/allApplications',jwtMiddleware,adminController.getAllAppliedJobsController)
+
 // remove user application
 router.delete('/viewjob/:id/viewApplication/:applicationId/remove',jwtMiddleware,adminController.removeApplicationConttoller)
 
